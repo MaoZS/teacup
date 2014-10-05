@@ -1,0 +1,53 @@
+<%= form_for(@tea) do |f| %>
+    <% if @tea.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@tea.errors.count, "error") %> prohibited this tea from being saved:</h2>
+
+          <ul>
+            <% @tea.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <table>
+      <tbody>
+      <tr>
+        <td>
+          <div class="field">
+            <%= f.label :title,'タイトル' %><br>
+            <%= f.text_field :title %>
+          </div>
+        </td>
+        <td>
+          <div class="field">
+            <%= f.label :name,'名前' %><br>
+            <%= f.text_field :name %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="field">
+            <%= f.label :text,'投稿内容' %><br>
+            <%= f.text_area :text %>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="field">
+            <%= f.label :code,'削除コード' %><br>
+            <%= f.text_field :code %>
+          </div>
+        </td>
+        <td>
+          <div class="actions">
+            <%= f.submit '投稿'%>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+<% end %>

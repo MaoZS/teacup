@@ -1,0 +1,66 @@
+<h1>Listing teas</h1>
+<p id="notice" font-size: large><%= notice %></p>
+
+<table border="1">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Title</th>
+    <th>Text</th>
+    <th>Date</th>
+    <th>Code</th>
+    <th>Deleted</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @teas.each do |tea| %>
+      <tr>
+        <td><%= tea.name %></td>
+        <td><%= tea.title %></td>
+        <td><%= tea.text %></td>
+        <td><%= tea.date %></td>
+        <td><%= tea.code %></td>
+        <td><%= tea.deleted %></td>
+        <td><%= link_to 'Show', tea %></td>
+        <td><%= link_to 'Edit', edit_tea_path(tea) %></td>
+        <td><%= link_to 'Destroy', tea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+<hr>
+
+<%= render 'postform' %>
+
+<% @teas.each do |tea| %>
+    <table border="1">
+      <tbody>
+          <tr>
+            <td><p><%= tea.id %></p>タイトル:<%= tea.title %></td>
+            <td>名前:<%= tea.name %></td>
+          </tr>
+          <tr>
+            <td colspan="2"><%= tea.text %></td>
+          </tr>
+          <tr>
+            <td><%= tea.date %></td>
+            <td>
+              <%= form_tag('/teas',method: 'PATCH') do %>
+                  <%= hidden_field :tea,:id,value:"#{tea.id}" %>
+                <div class="field" style="display: inline">
+                  <%= text_field :tea, :code,{size:4} %>
+                  <%= submit_tag '削除' %>
+                </div>
+              <% end%>
+            </td>
+            <td><%= link_to '削除', tea, method: :delete, data: { confirm: '削除してもよろしいですか？' } %></td>
+          </tr>
+
+      </tbody>
+    </table>
+<% end %>
+<br>
+
+<%= link_to 'New Tea', new_tea_path %>
